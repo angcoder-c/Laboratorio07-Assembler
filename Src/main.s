@@ -12,6 +12,9 @@ https://github.com/angcoder-c/Laboratorio07-Assembler
 
 .global main
 
+// 2.a. definir una variable global
+section .data
+	var: .word 36
 
 main:
 	// 1. Modo inmedianto vs modo registro
@@ -38,6 +41,18 @@ main:
 
 	// c. operacion aritmetica
 	ADD R2, R1, R0
+
+	// 2. LDR, STR y direccionamiento inmediato
+	// b. cargar 42 en un registro
+	LDR R0, =42
+	// c. almacenar r0 en var
+	LDR R1, =var
+    STR R0, [r1]
+    // d. leer var en otro registro
+    LDR r2, =var
+    LDR r3, [r2]
+
+
 
 loop:
 	b end
