@@ -1,0 +1,4 @@
+"./Src/inciso4.o"
+"./Src/inciso5.o"
+"./Src/main.o"
+"./Startup/startup_stm32f446retx.o"

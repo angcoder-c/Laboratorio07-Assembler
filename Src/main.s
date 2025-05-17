@@ -12,47 +12,114 @@ https://github.com/angcoder-c/Laboratorio07-Assembler
 
 .global main
 
-// 2.a. definir una variable global
-section .data
-	var: .word 36
+.data
+var: .word 36
+array: .byte 1, 2, 3, 4
 
+.text
 main:
-	// 1. Modo inmedianto vs modo registro
 
-	// inmediato
-	// a. cargar el valor 10 a R0
-	MOV R0, #10
+	//reset
+    LDR R0, =0
+    LDR R1, =0
+    LDR R2, =0
+    LDR R3, =0
+    LDR R4, =0
+    LDR R5, =0
+    LDR R6, =0
+    LDR R7, =0
 
-	// b. transferir valores entre r1 y r0
-	MOV R1, R0
+    // inciso 5
+	BL inciso5
+    BKPT #0
 
-	// c. operacion aritmetica
-	ADD R2, R1, R0
+    // 1. modo inmediato vs modo registro
 
-	// Registro
-	// a. cargar el valor 10 a R0 con operaciones aritmeticas
-	LDR R0, =5
-	LDR R1, =5
-	ADD R0, R1, R0
+    // a. cargar el valor 10 a R0
+    // modo inmediato
+    MOV R0, #10
 
-	// b. transferir valores entre r1 y r0
-	MOV R0, [R1]
-	MOV R1, [R0]
+    // b. transferir valores entre R1 y R0
+    MOV R1, R0
 
-	// c. operacion aritmetica
-	ADD R2, R1, R0
+    // c. operación aritmetica
+    ADD R2, R1, R0
 
-	// 2. LDR, STR y direccionamiento inmediato
-	// b. cargar 42 en un registro
-	LDR R0, =42
-	// c. almacenar r0 en var
-	LDR R1, =var
-    STR R0, [r1]
+    //reset
+    LDR R0, =0
+    LDR R1, =0
+    LDR R2, =0
+    LDR R3, =0
+    LDR R4, =0
+
+    // modo registro
+    // a. cargar el valor 10 a R0 usando una suma
+    LDR R3, =5
+    LDR R4, =5
+    ADD R0, R3, R4
+
+    // b. transferencia con registros (LDR/STR)
+    MOV R1, R0
+    MOV R0, R1
+
+    // c. operación aritmetica
+    ADD R2, R0, R1
+
+    //reset
+    LDR R0, =0
+    LDR R2, =0
+    LDR R1, =0
+    LDR R3, =0
+    LDR R4, =0
+
+    // 2. LDR, STR y direccionamiento inmediato
+
+    // b. cargar 42 en un registro
+    LDR R0, =42
+
+    // c. almacenar R0 en var
+    LDR R1, =var // hex
+    STR R0, [R1] // hex
+
     // d. leer var en otro registro
-    LDR r2, =var
-    LDR r3, [r2]
+    LDR R2, =var // hex
+    LDR R3, [R2] // hex
 
+    //reset
+    LDR R0, =0
+    LDR R1, =0
+    LDR R2, =0
+    LDR R3, =0
 
+    // 3. cargar, modificar y almacenar valores de un arreglo
 
-loop:
-	b end
+    LDR R4, =array // hex
+    LDRB R5, [R4] // hex
+
+    ADD R5, R5, #1
+
+	// ultima posición del arreglo
+    STRB R5, [R4, #3]
+
+    // reset
+    LDR R4, =0
+    LDR R5, =0
+
+    // inciso 4
+	// BL inciso4
+
+	//reset
+    LDR R0, =0
+    LDR R1, =0
+    LDR R2, =0
+    LDR R3, =0
+    LDR R4, =0
+    LDR R5, =0
+    LDR R6, =0
+    LDR R7, =0
+
+	// inciso 5
+	BL inciso5
+    BKPT #0
+ end:
+    BKPT #0
